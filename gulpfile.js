@@ -20,13 +20,13 @@ const browsersync = require("browser-sync").create();
 /* Paths */
 var path = {
     build: {
-        html: "dist/",
+        html: "dist/pages/",
         js: "dist/assets/js/",
         css: "dist/assets/css/",
         images: "dist/assets/img/"
     },
     src: {
-        html: "src/*.html",
+        html: "src/pages/*.html",
         js: "src/assets/js/*.js",
         css: "src/assets/sass/style.scss",
         images: "src/assets/img/**/*.{jpg,png,svg,gif,ico,webmanifest,xml}"
@@ -61,11 +61,9 @@ function html() {
     return src(path.src.html, { base: "src/" })
         .pipe(plumber())
         .pipe(panini({
-            root: 'src/',
-            layouts: 'src/tpl/layouts/',
-            partials: 'src/tpl/partials/',
-            helpers: 'src/tpl/helpers/',
-            data: 'src/tpl/data/'
+            root: 'src/pages/',
+            layouts: 'src/templates/layouts/',
+            partials: 'src/templates/partials/'
         }))
         .pipe(dest(path.build.html))
         .pipe(browsersync.stream());
