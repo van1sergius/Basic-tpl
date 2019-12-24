@@ -7,7 +7,7 @@ const cssbeautify = require("gulp-cssbeautify");
 const removeComments = require('gulp-strip-css-comments');
 const rename = require("gulp-rename");
 const sass = require("gulp-sass");
-const cssnano = require("gulp-cssnano");
+const cleancss = require("gulp-clean-css");
 const rigger = require("gulp-rigger");
 const uglify = require("gulp-uglify");
 const plumber = require("gulp-plumber");
@@ -79,12 +79,7 @@ function css() {
         }))
         .pipe(cssbeautify())
         .pipe(dest(path.build.css))
-        .pipe(cssnano({
-            zindex: false,
-            discardComments: {
-                removeAll: true
-            }
-        }))
+        .pipe(cleancss())
         .pipe(removeComments())
         .pipe(rename({
             suffix: ".min",
